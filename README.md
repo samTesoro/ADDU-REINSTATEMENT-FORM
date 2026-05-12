@@ -1,2 +1,2 @@
-# ADDU-LOA-FORM
-Ateneo de Davao University Leave of Absence (LOA) Page
+# ADDU-REINSTATEMENT-FORM
+Ateneo de Davao University Reinstatement Form Page
