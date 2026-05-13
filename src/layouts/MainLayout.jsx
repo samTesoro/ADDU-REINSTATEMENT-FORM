@@ -4,9 +4,9 @@ import Footer from "../components/Footer";
 
 export default function MainLayout() {
   const user = {
-    firstName: "Ej",
-    lastName: "Liu",
-    email: "efliu@addu.edu.ph",
+    firstName: "Lorem",
+    lastName: "Ipsum",
+    email: "example@addu.edu.ph",
   };
 
   return (

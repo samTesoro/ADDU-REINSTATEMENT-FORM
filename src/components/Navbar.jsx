@@ -1,15 +1,15 @@
 import adduLogo from "../assets/addu-white.png";
-import UserInfo from "./UserInfo";
+import UserProfile from "./UserProfile";
 
 export default function Navbar({ user }) {
 
   return (
     <header
-      className="flex justify-between items-center px-3 sm:px-6 md:px-10 lg:px-16 xl:px-24 py-3 sm:py-4 md:py-6 lg:py-8 shadow-md flex-wrap md:flex-nowrap gap-2"
+      className="flex justify-between items-center px-3 sm:px-6 md:px-10 lg:px-16 xl:px-24 py-2 sm:py-3 md:py-5 lg:py-6 shadow-md flex-wrap md:flex-nowrap gap-2"
       style={{ backgroundColor: "#2F3590" }}
     >
       <div className="flex items-center gap-2 sm:gap-3 md:gap-4 min-w-0">
-        <img src={adduLogo} alt="ADDU Logo" className="h-14 w-14 sm:h-16 sm:w-16 md:h-20 md:w-20 lg:h-24 lg:w-24 shrink-0" />
+        <img src={adduLogo} alt="ADDU Logo" className="h-12 w-12 sm:h-14 sm:w-14 md:h-18 md:w-18 lg:h-20 lg:w-20 shrink-0" />
         <div
           className="text-white hidden md:block min-w-0"
           style={{ fontFamily: "'Trajan Pro'", fontWeight: 300 }}
@@ -20,7 +20,12 @@ export default function Navbar({ user }) {
       </div>
 
       <div className="shrink-0">
-        <UserInfo user={user} />
+        {/* Always show UserProfile - it handles all responsive sizes */}
+        <UserProfile 
+          userName={`${user.firstName} ${user.lastName}`}
+          userEmail={user.email}
+          initials={user.firstName.split(" ")[0][0].toUpperCase()}
+        />
       </div>
     </header>
   );
