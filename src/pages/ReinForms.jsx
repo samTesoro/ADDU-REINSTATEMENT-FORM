@@ -1,19 +1,16 @@
 import { Button } from "#components/ui/button.jsx";
 import "../App.css";
-import Navbar from "#components/Navbar";
 import Inputs from "#components/Inputs.jsx";
-import Footer from "#components/Footer";
 import DatePicker from "#components/DatePicker.jsx";
 
 function ReinForm() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <main className="flex-grow px-5 py-15">
-        <div className="min-w-xl pl-40 pr-40">
-          <h1 className="text-2xl font-bold mb-6" style={{ fontFamily: "Trajan Pro" }}>REINSTATEMENT FORM</h1>
+    <div className="w-full">
+      <div className="w-full px-3 sm:px-6 md:px-12 lg:px-20 xl:px-32">
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-6 sm:mb-8" style={{ fontFamily: "Trajan Pro" }}>REINSTATEMENT FORM</h1>
 
-          {/* Grid Layout for Form Fields */}
-          <div className="grid grid-cols-2 gap-6">
+          {/* Grid Layout for Form Fields with responsive columns */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-5 md:gap-6 lg:gap-8">
             {/* Row 1 */}
             <div>
               <Inputs
@@ -70,7 +67,7 @@ function ReinForm() {
             </div>
 
             {/* Row 4 - Reason for LOA (Full Width) */}
-            <div className="col-span-2">
+            <div className="col-span-1 sm:col-span-2 lg:col-span-2">
               <Inputs
                 fieldName={"Reason for LOA"}
                 placeholder={"Enter Reason for LOA here"}
@@ -80,20 +77,19 @@ function ReinForm() {
           </div>
 
           {/* Buttons */}
-          <div className="flex justify-between items-center mt-8">
-            <Button variant="outline" className="w-26 h-9">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6 mt-8 sm:mt-10 md:mt-12">
+            <Button variant="outline" className="w-full sm:w-32 md:w-28 h-10">
               Clear
             </Button>
             <Button
               variant="default"
               style={{ backgroundColor: "#2F3590" }}
-              className="text-white w-41 h-10"
+              className="text-white w-full sm:w-40 md:w-32 h-10"
             >
               Submit
             </Button>
           </div>
         </div>
-      </main>
     </div>
   );
 }
