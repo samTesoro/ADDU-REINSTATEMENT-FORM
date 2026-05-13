@@ -5,9 +5,10 @@ import DatePicker from "#components/DatePicker.jsx";
 
 function ReinForm() {
   return (
-    <div className="w-full">
-      <div className="w-full px-3 sm:px-6 md:px-12 lg:px-20 xl:px-32">
-        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-6 sm:mb-8" style={{ fontFamily: "Trajan Pro" }}>REINSTATEMENT FORM</h1>
+    <div className="flex flex-col min-h-screen">
+      <main className="flex-grow px-5 py-15">
+        <div className="min-w-xl pl-40 pr-40">
+          <h1 className="text-2xl font-bold mb-6" style={{ fontFamily: "Trajan Pro Regular" }}>REINSTATEMENT FORM</h1>
 
           {/* Grid Layout for Form Fields with responsive columns */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-5 md:gap-6 lg:gap-8">
