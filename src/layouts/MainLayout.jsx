@@ -10,14 +10,14 @@ export default function MainLayout() {
   };
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <Navbar user={user} />
 
-      <main className="min-h-screen p-4">
+      <main className="flex-1 px-3 sm:px-4 md:px-6 lg:px-8 xl:px-10 py-4 sm:py-6 md:py-8 lg:py-10 overflow-y-auto">
         <Outlet />
       </main>
 
-      <Footer />
+      <Footer className="shrink-0" />
     </div>
   );
 }

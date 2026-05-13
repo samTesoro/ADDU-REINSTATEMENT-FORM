@@ -10,7 +10,8 @@ export default function UserInfo({ user }) {
         {firstLetter}
       </div>
 
-      <div className="text-white">
+      {/* Hide username and email on smaller screens to prevent overlap with logo */}
+      <div className="text-white hidden sm:block">
         <div className="text-lg font-semibold">
           {user.firstName} {user.lastName}
         </div>
