@@ -2,6 +2,7 @@ import { Button } from "#components/ui/button.jsx";
 import "../App.css";
 import Inputs from "#components/Inputs.jsx";
 import DatePicker from "#components/DatePicker.jsx";
+import DragFile from "#components/DragFile.jsx";
 
 function ReinForm() {
   return (
@@ -72,6 +73,15 @@ function ReinForm() {
             </div>
           </div>
 
+          {/* File Upload Section */}
+          <div className="mt-8 sm:mt-10 md:mt-12">
+            <label className="block text-sm font-medium text-gray-900 mb-3 sm:mb-4">
+              Upload Supporting Documents
+            </label>
+            <DragFile maxFiles={5} maxSize={50 * 1024 * 1024} />
+          </div>
+
+          {/* Buttons */}
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6 mt-8 sm:mt-10 md:mt-12">
             <Button variant="outline" className="w-full sm:w-32 md:w-28 h-10">
               Clear
