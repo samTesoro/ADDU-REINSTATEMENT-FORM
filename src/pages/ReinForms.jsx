@@ -1,11 +1,108 @@
+import { useState } from "react";
 import { Button } from "#components/ui/button.jsx";
 import "../App.css";
 import Inputs from "#components/Inputs.jsx";
 import DatePicker from "#components/DatePicker.jsx";
 import DragFile from "#components/DragFile.jsx";
 import DropDown from "#components/DropDown.jsx";
+import { DialogDemo } from "#components/ConfirmModal.jsx";
 
 function ReinForm() {
+  const [formData, setFormData] = useState({
+    email: "",
+    studentCode: "",
+    currentCourse: "",
+    firstName: "",
+    middleName: "",
+    lastName: "",
+    lastSchoolYear: "",
+    lastSemester: "",
+    dateOfLoa: undefined,
+    reason: "",
+  });
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (field) => (event) => {
+    setFormData((prev) => ({ ...prev, [field]: event.target.value }));
+  };
+
+  const handleSelect = (field) => (value) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const validateForm = () => {
+    const nextErrors = {};
+    const emailRegex = /\S+@\S+\.\S+/;
+
+    if (!formData.email.trim()) {
+      nextErrors.email = "Email is required.";
+    } else if (!emailRegex.test(formData.email)) {
+      nextErrors.email = "Enter a valid email address.";
+    }
+
+    if (!formData.studentCode.trim()) {
+      nextErrors.studentCode = "Student code is required.";
+    }
+
+    if (!formData.currentCourse) {
+      nextErrors.currentCourse = "Current course is required.";
+    }
+
+    if (!formData.firstName.trim()) {
+      nextErrors.firstName = "First name is required.";
+    }
+
+    if (!formData.middleName.trim()) {
+      nextErrors.middleName = "Middle name is required.";
+    }
+
+    if (!formData.lastName.trim()) {
+      nextErrors.lastName = "Last name is required.";
+    }
+
+    if (!formData.lastSchoolYear.trim()) {
+      nextErrors.lastSchoolYear = "Last school year is required.";
+    }
+
+    if (!formData.lastSemester) {
+      nextErrors.lastSemester = "Last semester attended is required.";
+    }
+
+    if (!formData.dateOfLoa) {
+      nextErrors.dateOfLoa = "Date of LOA is required.";
+    }
+
+    if (!formData.reason.trim()) {
+      nextErrors.reason = "Reason for LOA is required.";
+    }
+
+    setErrors(nextErrors);
+    return Object.keys(nextErrors).length === 0;
+  };
+
+  const handleConfirm = () => {
+    const isValid = validateForm();
+    if (!isValid) {
+      return;
+    }
+  };
+
+  const handleClear = () => {
+    setFormData({
+      email: "",
+      studentCode: "",
+      currentCourse: "",
+      firstName: "",
+      middleName: "",
+      lastName: "",
+      lastSchoolYear: "",
+      lastSemester: "",
+      dateOfLoa: undefined,
+      reason: "",
+    });
+    setErrors({});
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-1 w-full overflow-y-auto px-3 sm:px-6 md:px-10 lg:px-16 xl:px-24 py-6 sm:py-8 md:py-10">
@@ -22,6 +119,11 @@ function ReinForm() {
                 fieldName={"Email"}
                 subFieldName={""}
                 placeholder={"Enter email here"}
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange("email")}
+                error={errors.email}
               />
             </div>
             <div>
@@ -29,6 +131,10 @@ function ReinForm() {
                 fieldName={"Student Code"}
                 subFieldName={""}
                 placeholder={"Enter student code here"}
+                name="studentCode"
+                value={formData.studentCode}
+                onChange={handleChange("studentCode")}
+                error={errors.studentCode}
               />
             </div>
             <div>
@@ -42,6 +148,9 @@ function ReinForm() {
                   "BS Information Technology",
                   "BS Nursing",
                 ]}
+                value={formData.currentCourse}
+                onValueChange={handleSelect("currentCourse")}
+                error={errors.currentCourse}
               />
             </div>
 
@@ -51,6 +160,10 @@ function ReinForm() {
                 fieldName={"First Name"}
                 subFieldName={""}
                 placeholder={"Enter first name"}
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange("firstName")}
+                error={errors.firstName}
               />
             </div>
             <div>
@@ -58,6 +171,10 @@ function ReinForm() {
                 fieldName={"Middle Name"}
                 subFieldName={""}
                 placeholder={"Enter middle name"}
+                name="middleName"
+                value={formData.middleName}
+                onChange={handleChange("middleName")}
+                error={errors.middleName}
               />
             </div>
             <div>
@@ -65,6 +182,10 @@ function ReinForm() {
                 fieldName={"Last Name"}
                 subFieldName={""}
                 placeholder={"Enter last name"}
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange("lastName")}
+                error={errors.lastName}
               />
             </div>
 
@@ -74,6 +195,10 @@ function ReinForm() {
                 fieldName={"Last School Year Attended"}
                 subFieldName={""}
                 placeholder={"Enter last school year"}
+                name="lastSchoolYear"
+                value={formData.lastSchoolYear}
+                onChange={handleChange("lastSchoolYear")}
+                error={errors.lastSchoolYear}
               />
             </div>
             <div>
@@ -81,6 +206,9 @@ function ReinForm() {
                 fieldName={"Last Semester Attended"}
                 placeholder={"Select semester"}
                 options={["1st Semester", "2nd Semester", "Summer"]}
+                value={formData.lastSemester}
+                onValueChange={handleSelect("lastSemester")}
+                error={errors.lastSemester}
               />
             </div>
 
@@ -89,6 +217,9 @@ function ReinForm() {
               <DatePicker 
                 fieldName={"Date of LOA"}
                 subFieldName={""}
+                value={formData.dateOfLoa}
+                onChange={(date) => setFormData((prev) => ({ ...prev, dateOfLoa: date }))}
+                error={errors.dateOfLoa}
               />
             </div>
 
@@ -98,6 +229,10 @@ function ReinForm() {
                 fieldName={"Reason for LOA"}
                 placeholder={"Enter Reason for LOA here"}
                 isTextarea={true}
+                name="reason"
+                value={formData.reason}
+                onChange={handleChange("reason")}
+                error={errors.reason}
               />
             </div>
 
@@ -112,16 +247,18 @@ function ReinForm() {
 
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6 mt-8 sm:mt-10 md:mt-12">
-            <Button variant="outline" className="w-full sm:w-32 md:w-28 h-10">
+            <Button
+              variant="outline"
+              className="w-full sm:w-32 md:w-28 h-10"
+              onClick={handleClear}
+              type="button"
+            >
               Clear
             </Button>
-            <Button
-              variant="default"
-              style={{ backgroundColor: "#2F3590" }}
-              className="text-white w-full sm:w-40 md:w-32 h-10"
-            >
-              Submit
-            </Button>
+            <DialogDemo
+              onConfirm={handleConfirm}
+              triggerClassName="text-white w-full sm:w-40 md:w-32 h-10"
+            />
           </div>
         </div>
       </main>
