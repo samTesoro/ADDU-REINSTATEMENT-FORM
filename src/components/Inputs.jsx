@@ -28,14 +28,14 @@ export default function Inputs({
           className="w-full min-w-0 rounded-lg border border-black bg-transparent px-2.5 py-1 text-base transition-colors outline-none placeholder:text-muted-foreground focus-visible:border-black focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 resize-none"
         />
       ) : isSelect ? (
-        <select className="w-full rounded-lg border border-black bg-transparent px-2.5 py-1 text-base">
+        <select className="h-10 w-full rounded-lg border border-black bg-transparent px-2.5 py-1 text-base">
           <option value="">{placeholder}</option>
           {options.map((option) => (
             <option key={option} value={option}>{option}</option>
           ))}
         </select>
       ) : (
-        <Input placeholder={placeholder} />
+        <Input placeholder={placeholder} className="h-10" />
       )}
     </div>
   );
