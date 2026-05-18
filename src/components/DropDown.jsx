@@ -10,7 +10,11 @@ export default function DropDown({
   subFieldName,
   placeholder = "Select an option",
   options = [],
+  value,
+  onValueChange,
+  error,
 }) {
+  const errorClassName = error ? "border-red-500 focus-visible:border-red-500" : "border-black focus-visible:border-black";
 
   return (
     <div>
@@ -23,10 +27,10 @@ export default function DropDown({
           <span className="text-[#E9222E] ml-2">*</span>
         </h1>
       </div>
-      <Select defaultValue="" className="">
+      <Select value={value} onValueChange={onValueChange}>
         <SelectTrigger
           id="form-country"
-          className="h-10! w-full border-black bg-transparent px-2.5 py-1 text-sm leading-normal data-placeholder:text-muted-foreground"
+          className={`h-10! w-full ${errorClassName} bg-transparent px-2.5 py-1 text-sm leading-normal data-placeholder:text-muted-foreground`}
         >
           <SelectValue placeholder={placeholder} className="text-sm" />
         </SelectTrigger>
@@ -38,6 +42,7 @@ export default function DropDown({
           ))}
         </SelectContent>
       </Select>
+      {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
     </div>
   );
 }

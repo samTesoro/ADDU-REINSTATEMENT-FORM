@@ -23,13 +23,15 @@ function formatDate(date) {
         year: "numeric",
     })
 }
-export default function DatePicker({ fieldName, subFieldName }) {
-    const [open, setOpen] = React.useState(false)
-    const [date, setDate] = React.useState(undefined)
-    const [month, setMonth] = React.useState(undefined)
-    const [value, setValue] = React.useState(formatDate(date))
+export default function DatePicker({ fieldName, subFieldName, value, onChange, error }) {
+  const [open, setOpen] = React.useState(false)
+  const [date, setDate] = React.useState(undefined)
+  const [month, setMonth] = React.useState(undefined)
+  const selectedDate = value ?? date
+  const displayValue = formatDate(selectedDate)
+  const errorClassName = error ? "border-red-500" : "border-black"
     
-    return (<div>
+  return (<div>
         {/* Field Name */}
       <div className="pb-2">
         <h1 className="text-sm ">
@@ -42,10 +44,10 @@ export default function DatePicker({ fieldName, subFieldName }) {
       </div>
 
       {/* Input */}
-       <InputGroup className="h-10 w-full min-w-0 rounded-lg border border-black bg-transparent">
+     <InputGroup className={`h-10 w-full min-w-0 rounded-lg border ${errorClassName} bg-transparent`}>
         <InputGroupInput
           id="date-required"
-          value={value}
+       value={displayValue}
           placeholder="June 01, 2025"
           readOnly
           className="h-10 w-full min-w-0 rounded-lg border-0 bg-transparent px-2.5 py-1 text-base outline-none placeholder:text-muted-foreground focus-visible:outline-none"
@@ -78,7 +80,7 @@ export default function DatePicker({ fieldName, subFieldName }) {
                 onMonthChange={setMonth}
                 onSelect={(date) => {
                   setDate(date)
-                  setValue(formatDate(date))
+                  onChange?.(date)
                   setOpen(false)
                 }}
               />
@@ -86,5 +88,6 @@ export default function DatePicker({ fieldName, subFieldName }) {
           </Popover>
         </InputGroupAddon>
       </InputGroup>
+      {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
     </div>)
 }
